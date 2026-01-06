@@ -31,7 +31,7 @@ class MindwaveGUI:
         self.headset = None
         self.test_thread = None
         self.record_thread = None
-        self.sudo_password = "3.14159"
+        self.sudo_password = os.getenv('SUDO_PASSWORD', None)
 
         # Variables pour le vumètre
         self.signal_strength = tk.IntVar(value=255)
