@@ -1,0 +1,54 @@
+═══════════════════════════════════════════════════════════
+MINDWAVE MOBILE - RÉFÉRENCE RAPIDE DES COMMANDES
+═══════════════════════════════════════════════════════════
+
+CONNEXION/DÉCONNEXION
+─────────────────────
+./connect_mindwave.sh              Connecter le casque
+./disconnect_mindwave.sh           Déconnecter le casque
+
+TEST ET VISUALISATION
+─────────────────────
+python3 test_mindwave.py           Test en temps réel
+                                   (affiche raw, attention, meditation)
+
+ENREGISTREMENT DE DONNÉES
+─────────────────────────
+python3 record_eeg.py              Enregistrement continu
+python3 record_eeg.py -d 60        Enregistrer pendant 60 secondes
+python3 record_eeg.py -d 300       Enregistrer pendant 5 minutes
+
+GESTION BLUETOOTH (si nécessaire)
+─────────────────────────────────
+bluetoothctl devices               Lister les appareils Bluetooth
+bluetoothctl info E0:7D:EA:E6:50:3C  Info sur le MindWave
+sudo rfcomm release 0              Libérer manuellement le port
+
+ANALYSE DES DONNÉES
+───────────────────
+Les fichiers CSV sont dans: data/
+
+Exemple Python pour analyser:
+  import pandas as pd
+  df = pd.read_csv('data/eeg_data_YYYYMMDD_HHMMSS.csv')
+  print(df.describe())
+
+RÉSOLUTION DE PROBLÈMES
+───────────────────────
+sudo chmod 666 /dev/rfcomm0        Corriger les permissions
+ls -la /dev/rfcomm*                Vérifier le port RFCOMM
+
+FICHIERS IMPORTANTS
+───────────────────
+QUICK_START.md                     Guide de démarrage rapide
+README_SETUP.md                    Documentation complète
+
+DONNÉES DISPONIBLES
+───────────────────
+- raw_value    : Signal EEG brut (512 Hz)
+- attention    : Niveau d'attention (0-100)
+- meditation   : Niveau de méditation (0-100)
+- blink        : Force du clignement (0-255)
+- poor_signal  : Qualité du signal (0=meilleur, 255=pire)
+
+═══════════════════════════════════════════════════════════
